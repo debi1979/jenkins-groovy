@@ -1,0 +1,509 @@
+* GCP CheatSheet                                                 :Cloud:
+:PROPERTIES:
+:type:     kubernetes
+:export_file_name: cheatsheet-gcp-A4.pdf
+:END:
+
+#+BEGIN_HTML
+<a href="https://github.com/dennyzhang/cheatsheet-gcp-A4"><img align="right" width="200" height="183" src="https://www.dennyzhang.com/wp-content/uploads/denny/watermark/github.png" /></a>
+<div id="the whole thing" style="overflow: hidden;">
+<div style="float: left; padding: 5px"> <a href="https://www.linkedin.com/in/dennyzhang001"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a></div>
+<div style="float: left; padding: 5px"><a href="https://github.com/dennyzhang"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a></div>
+<div style="float: left; padding: 5px"><a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a></div>
+</div>
+
+<br/><br/>
+<a href="http://makeapullrequest.com" target="_blank" rel="nofollow"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
+#+END_HTML
+
+- PDF Link: [[https://github.com/dennyzhang/cheatsheet-gcp-A4/blob/master/cheatsheet-gcp-A4.pdf][cheatsheet-gcp-A4.pdf]], Category: [[https://cheatsheet.dennyzhang.com/category/cloud/][Cloud]]
+- Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-gcp-A4
+- Related posts: [[https://cheatsheet.dennyzhang.com/cheatsheet-aws-A4][AWS CheatSheet]], [[https://cheatsheet.dennyzhang.com/cheatsheet-openshift-A4][OpenShift CheatSheet]], [[https://github.com/topics/denny-cheatsheets][#denny-cheatsheets]]
+
+File me [[https://github.com/dennyzhang/cheatsheet-gcp-A4/issues][Issues]] or star [[https://github.com/dennyzhang/cheatsheet-gcp-A4][this repo]].
+** GCP Basic
+| Name                     | Summary                                                                  |
+|--------------------------+--------------------------------------------------------------------------|
+| Official Doc             | [[https://cloud.google.com/sdk/gcloud/reference/][Link: gcloud reference]], [[https://cloud.google.com/storage/docs/gsutil][Link: gsutil tool]]                                |
+| gsutil installation      | [[https://cloud.google.com/storage/docs/gsutil/addlhelp/CRC32CandInstallingcrcmod#debian-and-ubuntu][Link: install crcmod]], [[https://cloud.google.com/storage/docs/gsutil_install][Link: Install gsutil]]                               |
+| Installation             | [[https://cloud.google.com/sdk/docs/quickstart-linux][Link: Install gcloud]]                                                     |
+| Check version & settings | =gcloud version=, =gcloud info=, =gcloud components list=                |
+| Init profile             | =gcloud init= This will ask you to open an OpenID URL                    |
+| List all zones           | =gcloud compute zones list=                                              |
+| Upgrade local SDK        | =gcloud components update=, =gcloud components update --version 219.0.1= |
+** Bucket Basic
+| Name                       | Summary                                                                      |
+|----------------------------+------------------------------------------------------------------------------|
+| List all buckets and files | =gsutil ls=, =gsutil ls -lh gs://<bucket-name>=                              |
+| Download file              | =gsutil cp gs://<bucket-name>/<dir-path>/package-1.1.tgz .=                  |
+| Upload file                | =gsutil cp <filename> gs://<bucket-name>/<directory>/=                       |
+| Cat file                   | =gsutil cat gs://<bucket-name>/<filepath>/=                                  |
+| Delete file                | =gsutil rm gs://<bucket-name>/<filepath>=                                    |
+| Move file                  | =gsutil mv <src-filepath> gs://<bucket-name>/<directory>/<dest-filepath>=    |
+| Copy folder                | =gsutil cp -r ./conf gs://<bucket-name>/=                                    |
+| Show disk usage            | =gsutil du -h gs://<bucket-name/<directory>=                                 |
+| Create bucket              | =gsutil mb gs://<bucket-name>=                                               |
+| Caculate file sha1sum      | =gsha1sum syslog-migration-10.0.2.tgz=, =shasum syslog-migration-10.0.2.tgz= |
+| Gsutil help                | =gsutil help=, =gsutil help cp=, =gsutil help options=                       |
+| Reference                  | [[https://cloud.google.com/storage/docs/quickstart-gsutil][Link: Quickstart: Using the gsutil Tool]]                                      |
+** GCP Project
+| Name              | Summary                                            |
+|-------------------+----------------------------------------------------|
+| List projects     | =gcloud config list=, =gcloud config list project= |
+| Show project info | =gcloud compute project-info describe=             |
+| Switch project    | =gcloud config set project <project-id>=           |
+** GKE
+| Name                                    | Summary                                                    |
+|-----------------------------------------+------------------------------------------------------------|
+| Display a list of credentialed accounts | =gcloud auth list=                                         |
+| Set the active account                  | =gcloud config set account <ACCOUNT>=                      |
+| Set kubectl context                     | =gcloud container clusters get-credentials <cluster-name>= |
+| Change region                           | =gcloud config set compute/region us-west=                 |
+| Change zone                             | =gcloud config set compute/zone us-west1-b=                |
+| List all container clusters             | =gcloud container clusters list=                           |
+** IAM
+| Name                                    | Summary                                                             |
+|-----------------------------------------+---------------------------------------------------------------------|
+| Authenticate client                     | =gcloud auth activate-service-account --key-file <key-file>=        |
+| Display a list of credentialed accounts | =gcloud auth list=                                                  |
+| Set the active account                  | =gcloud config set account <ACCOUNT>=                               |
+| [[https://cloud.google.com/sdk/gcloud/reference/auth/configure-docker][Auth to GCP Container Registry]]          | =gcloud auth configure-docker=                                      |
+| Print token for active account          | =gcloud auth print-access-token=, =gcloud auth print-refresh-token= |
+| Revoke previous generated credential    | =gcloud auth <application-default> revoke=                          |
+** Bucket Security
+| Name                    | Summary                                                                               |
+|-------------------------+---------------------------------------------------------------------------------------|
+| Make all files readable | =gsutil -m acl set -R -a public-read gs://<bucket-name>/=                             |
+| Config auth             | =gsutil config -a=                                                                    |
+| Grant bucket access     | =gsutil iam ch user:denny@gmail.com:objectCreator,objectViewer gs://<bucket-name>=    |
+| Remove bucket access    | =gsutil iam ch -d user:denny@gmail.com:objectCreator,objectViewer gs://<bucket-name>= |
+#+BEGIN_HTML
+<a href="https://cheatsheet.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
+#+END_HTML
+** VM
+| Name               | Summary                                                                                                   |
+|--------------------+-----------------------------------------------------------------------------------------------------------|
+| List all instances | =gcloud compute instances list=, =gcloud compute instance-templates list=                                 |
+| Show instance info | =gcloud compute instances describe "<instance-name>" --project "<project-name>" --zone "us-west2-a"=      |
+| Stop an instance   | =gcloud compute instances stop instance-2=                                                                |
+| Start an instance  | =gcloud compute instances start instance-2=                                                               |
+| Create an instance | =gcloud compute instances create vm1 --image image-1 --tags test --zone "<zone>" --machine-type f1-micro= |
+| SSH to instance    | =gcloud compute ssh --project "<project-name>" --zone "<zone-name>" "<instance-name>"=                    |
+| Download files     | =gcloud compute copy-files example-instance:~/REMOTE-DIR ~/LOCAL-DIR --zone us-central1-a=                |
+| Upload files       | =gcloud compute copy-files ~/LOCAL-FILE-1 example-instance:~/REMOTE-DIR --zone us-central1-a=             |
+** Disks & Volumes
+| Name                | Summary                                                                        |
+|---------------------+--------------------------------------------------------------------------------|
+| List all disks      | =gcloud compute disks list=                                                    |
+| List all disk types | =gcloud compute disk-types list=                                               |
+| List all snapshots  | =gcloud compute snapshots list=                                                |
+| Create snapshot     | =gcloud compute disks snapshot <diskname> --snapshotname <name1> --zone $zone= |
+** Network
+| Name                  | Summary                                                                             |
+|-----------------------+-------------------------------------------------------------------------------------|
+| List all networks     | =gcloud compute networks list=                                                      |
+| Detail of one network | =gcloud compute networks describe <network-name> --format json=                     |
+| Create network        | =gcloud compute networks create <network-name>=                                     |
+| Create subnet         | =gcloud compute networks subnets create subnet1 --network net1 --range 10.5.4.0/24= |
+| Get a static ip       | =gcloud compute addresses create --region us-west2-a vpn-1-static-ip=               |
+| List all ip addresses | =gcloud compute addresses list=                                                     |
+| Describe ip address   | =gcloud compute addresses describe <ip-name> --region us-central1=                  |
+| List all routes       | =gcloud compute routes list=                                                        |
+| Reference             | [[https://gist.github.com/aleccunningham/670115b2573be699b629954852b6598f][aleccunningham gist: vpn-setup.sh]]                                                   |
+** DNS
+| Name                               | Summary                                                 |
+|------------------------------------+---------------------------------------------------------|
+| List of all record-sets in my_zone | =gcloud dns record-sets list --zone my_zone=            |
+| List first 10 DNS records          | =gcloud dns record-sets list --zone my_zone --limit=10= |
+** Firewall
+| Name                       | Summary                                                                                    |
+|----------------------------+--------------------------------------------------------------------------------------------|
+| List all firewall rules    | =gcloud compute firewall-rules list=                                                       |
+| List all forwarding rules  | =gcloud compute forwarding-rules list=                                                     |
+| Describe one firewall rule | =gcloud compute firewall-rules describe <rule-name>=                                       |
+| Create one firewall rule   | =gcloud compute firewall-rules create my-rule --network default --allow tcp:9200 tcp:3306= |
+| Update one firewall rule   | =gcloud compute firewall-rules update default --network default --allow tcp:9200 tcp:9300= |
+** Images & Containers
+| Name                        | Summary                                                    |
+|-----------------------------+------------------------------------------------------------|
+| List all images             | =gcloud compute images list=                               |
+| List all container clusters | =gcloud container clusters list=                           |
+| Set kubectl context         | =gcloud container clusters get-credentials <cluster-name>= |
+** RDS
+| Name                   | Summary                     |
+|------------------------+-----------------------------|
+| List all sql instances | =gcloud sql instances list= |
+** Services
+| Name                               | Summary                                  |
+|------------------------------------+------------------------------------------|
+| List my backend services           | =gcloud compute backend-services list=   |
+| List all my health check endpoints | =gcloud compute http-health-checks list= |
+| List all URL maps                  | =gcloud compute url-maps list=           |
+** More Resources
+[[https://gist.github.com/kelseyhightower/61ce324db5639f95c77c686cc0d11fa5][kelseyhightower gist: create-global-lb.sh]]
+
+[[https://gist.github.com/mingderwang/12b399100cdfad039f5e][mingderwang gist: gistfile1.txt]]
+
+License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_license.txt][MIT License]].
+#+BEGIN_HTML
+<a href="https://cheatsheet.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
+<a href="https://cheatsheet.dennyzhang.com"><img align="right" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
+
+<a href="https://www.linkedin.com/in/dennyzhang001"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a>
+<a href="https://github.com/dennyzhang"><img align="bottom"src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a>
+<a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a>
+#+END_HTML
+* org-mode configuration                                           :noexport:
+#+STARTUP: overview customtime noalign logdone showall
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LATEX_HEADER: \usepackage[margin=0.6in]{geometry}
+#+LaTeX_CLASS_OPTIONS: [8pt]
+#+LATEX_HEADER: \usepackage[english]{babel}
+#+LATEX_HEADER: \usepackage{lastpage}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+#+LATEX_HEADER: \fancyhf{}
+#+LATEX_HEADER: \rhead{Updated: \today}
+#+LATEX_HEADER: \rfoot{\thepage\ of \pageref{LastPage}}
+#+LATEX_HEADER: \lfoot{\href{https://github.com/dennyzhang/cheatsheet-gcp-A4}{GitHub: https://github.com/dennyzhang/cheatsheet-gcp-A4}}
+#+LATEX_HEADER: \lhead{\href{https://cheatsheet.dennyzhang.com/cheatsheet-gcp-A4}{Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-gcp-A4}}
+#+AUTHOR: Denny Zhang
+#+EMAIL:  denny@dennyzhang.com
+#+TAGS: noexport(n)
+#+PRIORITIES: A D C
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+EXPORT_EXCLUDE_TAGS: exclude noexport
+#+SEQ_TODO: TODO HALF ASSIGN | DONE BYPASS DELEGATE CANCELED DEFERRED
+#+LINK_UP:
+#+LINK_HOME:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO gsutil cp with multiple part                                :noexport:
+#+BEGIN_EXAMPLE
+   /tmp  gsutil cp wavefront-proxy-0.9.0-dev.33.tgz gs://pks-releng-final-releases/wavefront-proxy-0.9.0-dev.33.tgz                                                                                                                  ✔ 0
+Copying file://wavefront-proxy-0.9.0-dev.33.tgz [Content-Type=application/x-tar]...
+==> NOTE: You are uploading one or more large file(s), which would run
+significantly faster if you enable parallel composite uploads. This
+feature can be enabled by editing the
+"parallel_composite_upload_threshold" value in your .boto
+configuration file. However, note that if you do this large files will
+be uploaded as `composite objects
+<https://cloud.google.com/storage/docs/composite-objects>`_,which
+means that any user who downloads such objects will need to have a
+compiled crcmod installed (see "gsutil help crcmod"). This is because
+without a compiled crcmod, computing checksums on composite objects is
+so slow that gsutil disables downloads of composite objects.
+
+- [0 files][116.5 MiB/450.2 MiB]   10.8 MiB/s
+#+END_EXAMPLE
+* TODO Add more gcloud commands                                    :noexport:
+** gcloud compute config-ssh                                       :noexport:
+ https://gist.github.com/frntn/838dbbbc857c6e3dc51e
+** gcloud compute instances add-tags
+** gcloud compute instances attach-disk
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO How to clean up everything inside one project?              :noexport:
+* setup gke manually                                               :noexport:
+** kube-up.sh error
+#+BEGIN_EXAMPLE
+denny_zhang001@cloudshell:~/kubernetes (denny-k8s-test1)$ ./cluster/kube-up.sh
+... Starting cluster in us-central1-b using provider gce
+... calling verify-prereqs
+... calling verify-kube-binaries
+!!! kubectl appears to be broken or missing
+Required release artifacts appear to be missing. Do you wish to download them? [Y/n]
+Y
+Can't determine Kubernetes release.
+/home/denny_zhang001/kubernetes/cluster/get-kube-binaries.sh should only be run from a prebuilt Kubernetes release.
+Did you mean to use get-kube.sh instead?
+#+END_EXAMPLE
+* DONE gcloud init                                                 :noexport:
+  CLOSED: [2018-09-07 Fri 11:13]
+https://cloud.google.com/sdk/docs/quickstart-macos
+#+BEGIN_EXAMPLE
+  /Users/zdenny/Downloads/google-cloud-sdk  ./install.sh                                                                                     ✘ 127
+Welcome to the Google Cloud SDK!
+
+To help improve the quality of this product, we collect anonymized usage data
+and anonymized stacktraces when crashes are encountered; additional information
+is available at <https://cloud.google.com/sdk/usage-statistics>. You may choose
+to opt out of this collection now (by choosing 'N' at the below prompt), or at
+any time in the future by running the following command:
+
+    gcloud config set disable_usage_reporting true
+
+Do you want to help improve the Google Cloud SDK (Y/n)?  n
+
+
+Your current Cloud SDK version is: 210.0.0
+The latest available version is: 210.0.0
+
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                  Components                                                 │
+├───────────────┬──────────────────────────────────────────────────────┬──────────────────────────┬───────────┤
+│     Status    │                         Name                         │            ID            │    Size   │
+├───────────────┼──────────────────────────────────────────────────────┼──────────────────────────┼───────────┤
+│ Not Installed │ App Engine Go Extensions                             │ app-engine-go            │ 152.8 MiB │
+│ Not Installed │ Cloud Bigtable Command Line Tool                     │ cbt                      │   4.8 MiB │
+│ Not Installed │ Cloud Bigtable Emulator                              │ bigtable                 │   4.3 MiB │
+│ Not Installed │ Cloud Datalab Command Line Tool                      │ datalab                  │   < 1 MiB │
+│ Not Installed │ Cloud Datastore Emulator                             │ cloud-datastore-emulator │  17.4 MiB │
+│ Not Installed │ Cloud Datastore Emulator (Legacy)                    │ gcd-emulator             │  38.1 MiB │
+│ Not Installed │ Cloud Pub/Sub Emulator                               │ pubsub-emulator          │  33.4 MiB │
+│ Not Installed │ Cloud SQL Proxy                                      │ cloud_sql_proxy          │   2.5 MiB │
+│ Not Installed │ Emulator Reverse Proxy                               │ emulator-reverse-proxy   │  14.5 MiB │
+│ Not Installed │ Google Cloud Build Local Builder                     │ cloud-build-local        │   4.4 MiB │
+│ Not Installed │ Google Container Local Builder                       │ container-builder-local  │   4.4 MiB │
+│ Not Installed │ Google Container Registry's Docker credential helper │ docker-credential-gcr    │   1.8 MiB │
+│ Not Installed │ gcloud Alpha Commands                                │ alpha                    │   < 1 MiB │
+│ Not Installed │ gcloud Beta Commands                                 │ beta                     │   < 1 MiB │
+│ Not Installed │ gcloud app Java Extensions                           │ app-engine-java          │ 118.6 MiB │
+│ Not Installed │ gcloud app PHP Extensions                            │ app-engine-php           │  21.9 MiB │
+│ Not Installed │ gcloud app Python Extensions                         │ app-engine-python        │   6.1 MiB │
+│ Not Installed │ gcloud app Python Extensions (Extra Libraries)       │ app-engine-python-extras │  28.5 MiB │
+│ Not Installed │ kubectl                                              │ kubectl                  │  14.8 MiB │
+│ Installed     │ BigQuery Command Line Tool                           │ bq                       │   < 1 MiB │
+│ Installed     │ Cloud SDK Core Libraries                             │ core                     │   8.2 MiB │
+│ Installed     │ Cloud Storage Command Line Tool                      │ gsutil                   │   3.5 MiB │
+└───────────────┴──────────────────────────────────────────────────────┴──────────────────────────┴───────────┘
+To install or remove components at your current SDK version [210.0.0], run:
+  $ gcloud components install COMPONENT_ID
+  $ gcloud components remove COMPONENT_ID
+
+To update your SDK installation to the latest version [210.0.0], run:
+  $ gcloud components update
+
+
+Modify profile to update your $PATH and enable shell command
+completion?
+
+Do you want to continue (Y/n)?
+#+END_EXAMPLE
+* TODO cloudshell                                                  :noexport:
+** curl -sS https://get.k8s.io | bash error
+#+BEGIN_EXAMPLE
+denny_zhang001@cloudshell:~/kubernetes (denny-k8s-test1)$ curl -sS https://get.k8s.io | bash
+'kubernetes' directory already exist. Should we skip download step and start to create cluster based on it? [Y]/n
+Skipping download step.
+Creating a kubernetes on gce...
+... Starting cluster in us-central1-b using provider gce
+... calling verify-prereqs
+... calling verify-kube-binaries
+... calling verify-release-tars
+... calling kube-up
+Project: denny-k8s-test1
+Network Project: denny-k8s-test1
+Zone: us-central1-b
+BucketNotFoundException: 404 gs://kubernetes-staging-8e7ceb888c bucket does not exist.
+Creating gs://kubernetes-staging-8e7ceb888c
+Creating gs://kubernetes-staging-8e7ceb888c/...
++++ Staging server tars to Google Storage: gs://kubernetes-staging-8e7ceb888c/kubernetes-devel
++++ kubernetes-server-linux-amd64.tar.gz uploaded (sha1 = 2f4bb5e579f038d4f71ab88a68653dd64dacb924)
++++ kubernetes-manifests.tar.gz uploaded (sha1 = b2be17f08cff1c712e6ebcd454073491e83def6e)
+INSTANCE_GROUPS=
+NODE_NAMES=
+Looking for already existing resources
+Found existing network default in AUTO mode.
+Creating firewall...
+.Creating firewall...
+.IP aliases are disabled.
+..Creating firewall...
+..Found subnet for region us-central1 in network default: default
+Starting master and configuring firewalls
+...Creating firewall...
+...................Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/zones/us-central1-b/disks/kubernetes-master-pd].
+NAME                  ZONE           SIZE_GB  TYPE    STATUS
+kubernetes-master-pd  us-central1-b  20       pd-ssd  READY
+
+New disks are unformatted. You must format and mount a disk before it
+can be used. You can find instructions on how to do this at:
+
+https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting
+
+....Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/firewalls/kubernetes-default-internal-master].
+done.
+...NAME                                NETWORK  DIRECTION  PRIORITY  ALLOW                                       DENY
+kubernetes-default-internal-master  default  INGRESS    1000      tcp:1-2379,tcp:2382-65535,udp:1-65535,icmp
+...Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/firewalls/kubernetes-default-internal-node].
+done.
+..NAME                              NETWORK  DIRECTION  PRIORITY  ALLOW                         DENY
+kubernetes-default-internal-node  default  INGRESS    1000      tcp:1-65535,udp:1-65535,icmp
+Creating firewall...
+.........Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/firewalls/kubernetes-master-https].
+done.
+.NAME                     NETWORK  DIRECTION  PRIORITY  ALLOW    DENY
+kubernetes-master-https  default  INGRESS    1000      tcp:443
+.....Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/firewalls/default-default-ssh].
+.done.
+.Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/regions/us-central1/addresses/kubernetes-master-ip].
+NAME                 NETWORK  DIRECTION  PRIORITY  ALLOW   DENY
+default-default-ssh  default  INGRESS    1000      tcp:22
+....Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/firewalls/kubernetes-master-etcd].
+Generating certs for alternate-names: IP:35.202.25.117,IP:10.0.0.1,DNS:kubernetes,DNS:kubernetes.default,DNS:kubernetes.default.svc,DNS:kubernetes.default.svc.cluster.local,DNS:kubernetes-master
+done.
+NAME                    NETWORK  DIRECTION  PRIORITY  ALLOW              DENY
+kubernetes-master-etcd  default  INGRESS    1000      tcp:2380,tcp:2381
+Unable to successfully run 'cfssl' from /home/denny_zhang001/gopath/bin:/google/gopath/bin:/google/google-cloud-sdk/bin:/usr/local/go/bin:/opt/gradle/bin:/opt/maven/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/nvm/versions/node/v8.9.4/bin:/google/go_appengine:/google/google_appengine; downloading instead...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  9.8M  100  9.8M    0     0  21.6M      0 --:--:-- --:--:-- --:--:-- 21.6M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 2224k  100 2224k    0     0  5913k      0 --:--:-- --:--:-- --:--:-- 5900k
+2018/09/01 21:44:46 [INFO] generating a new CA key and certificate from CSR
+2018/09/01 21:44:46 [INFO] generate received request
+2018/09/01 21:44:46 [INFO] received CSR
+2018/09/01 21:44:46 [INFO] generating key: ecdsa-256
+2018/09/01 21:44:46 [INFO] encoded CSR
+2018/09/01 21:44:46 [INFO] signed certificate with serial number 706141843357032989988605479444757188691606705372
+Generate peer certificates...
+2018/09/01 21:44:46 [INFO] generate received request
+2018/09/01 21:44:46 [INFO] received CSR
+2018/09/01 21:44:46 [INFO] generating key: ecdsa-256
+2018/09/01 21:44:46 [INFO] encoded CSR
+2018/09/01 21:44:46 [INFO] signed certificate with serial number 276176297632265353784428191039168220001881808756
++++ Logging using Fluentd to gcp
+./cluster/../cluster/../cluster/gce/util.sh: line 964: CUSTOM_KUBE_DASHBOARD_BANNER: unbound variable
+Creating firewall...
+...........Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/firewalls/kubernetes-minion-all].
+done.
+NAME                   NETWORK  DIRECTION  PRIORITY  ALLOW                     DENY
+kubernetes-minion-all  default  INGRESS    1000      tcp,udp,icmp,esp,ah,sctp
+WARNING: You have selected a disk size of under [200GB]. This may result in poor I/O performance. For more information, see: https://developers.google.com/compute/docs/disks#performance.
+Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/zones/us-central1-b/instances/kubernetes-master].
+WARNING: Some requests generated warnings:
+ - The resource 'projects/cos-cloud/global/images/cos-stable-65-10323-64-0' is deprecated. A suggested replacement is 'projects/cos-cloud/global/images/cos-stable-65-10323-69-0'.
+
+NAME               ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP    STATUS
+kubernetes-master  us-central1-b  n1-standard-1               10.128.0.2   35.202.25.117  RUNNING
+Creating nodes.
+./cluster/../cluster/../cluster/gce/util.sh: line 964: CUSTOM_KUBE_DASHBOARD_BANNER: unbound variable
+Using subnet default
+Attempt 1 to create kubernetes-minion-template
+WARNING: You have selected a disk size of under [200GB]. This may result in poor I/O performance. For more information, see: https://developers.google.com/compute/docs/disks#performance.
+Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/global/instanceTemplates/kubernetes-minion-template].
+NAME                        MACHINE_TYPE   PREEMPTIBLE  CREATION_TIMESTAMP
+kubernetes-minion-template  n1-standard-2               2018-09-01T21:45:06.162-07:00
+Created [https://www.googleapis.com/compute/v1/projects/denny-k8s-test1/zones/us-central1-b/instanceGroupManagers/kubernetes-minion-group].
+NAME                     LOCATION       SCOPE  BASE_INSTANCE_NAME       SIZE  TARGET_SIZE  INSTANCE_TEMPLATE           AUTOSCALED
+kubernetes-minion-group  us-central1-b  zone   kubernetes-minion-group  0     3            kubernetes-minion-template  no
+Group is stable
+INSTANCE_GROUPS=kubernetes-minion-group
+NODE_NAMES=kubernetes-minion-group-d313 kubernetes-minion-group-jt59 kubernetes-minion-group-k3rq
+Trying to find master named 'kubernetes-master'
+Looking for address 'kubernetes-master-ip'
+Using master: kubernetes-master (external IP: 35.202.25.117)
+Waiting up to 300 seconds for cluster initialization.
+
+  This will continually check to see if the API for kubernetes is reachable.
+  This may time out if there was some uncaught error during start up.
+
+........................................................................................................................................Cluster failed to initialize within 300 seconds.
+Last output from querying API server follows:
+-----------------------------------------------------
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (7) Failed to connect to 35.202.25.117 port 443: Connection refused
+#+END_EXAMPLE
+* gsutil parallel upload                                           :noexport:
+#+BEGIN_EXAMPLE
+
+   /Users/zdenny  gsutil cp wavefront-proxy-0.8.0.tgz gs://pks-releng-final-releases/wavefront-proxy-0.8.0.tgz                                                                                                                                                       ✔ 0
+Copying file://wavefront-proxy-0.8.0.tgz [Content-Type=application/x-tar]...
+==> NOTE: You are uploading one or more large file(s), which would run
+significantly faster if you enable parallel composite uploads. This
+feature can be enabled by editing the
+"parallel_composite_upload_threshold" value in your .boto
+configuration file. However, note that if you do this large files will
+be uploaded as `composite objects
+<https://cloud.google.com/storage/docs/composite-objects>`_,which
+means that any user who downloads such objects will need to have a
+compiled crcmod installed (see "gsutil help crcmod"). This is because
+without a compiled crcmod, computing checksums on composite objects is
+so slow that gsutil disables downloads of composite objects.
+
+/ [0 files][187.2 MiB/492.4 MiB]   11.2 MiB/s
+#+END_EXAMPLE
+* gcloud preview docker push  gcr.io/iron_potion_92209/mingderwang_mediawalker2_karaf :noexport:
+https://gist.github.com/mingderwang/12b399100cdfad039f5e
+* gke command                                                      :noexport:
+https://gist.github.com/mingderwang/12b399100cdfad039f5e
+
+9959  gcloud alpha container kubectl create -f wordpress.json
+ 9960  gcloud config set compute/zone us-central1-a
+ 9961  gcloud alpha container kubectl create -f wordpress.json
+ 9962  gcloud config set compute/cluster cluster-rethinkdb
+ 9963  gcloud alpha container clusters create hello-world \\
+ 9966  gcloud alpha container kubectl get pod
+ 9967  gcloud alpha container kubectl get pod wordpress
+ 9968  gcloud alpha container kubectl get pod
+ 9969  gcloud compute firewall-rules create hello-world-node-80 --allow tcp:80 \\
+ 9971  gcloud alpha container kubectl get se
+ 9972  gcloud alpha container kubectl get rc
+ 9976  gcloud components update gae-go
+ 9977  gcloud alpha container kubectl get pod wordpress
+ 9978  gcloud alpha container kubectl get po
+ 9979  gcloud alpha container kubectl create -f wordpress.json
+ 9982  gcloud alpha container kubectl create -f wordpress.json
+ 9983  gcloud alpha container kubectl get po
+* TODO Blog: Experience with GKE                                   :noexport:
+** envs: GKE prometheus
+http://35.208.58.224/
+admin
+** DONE envs: ferran
+   CLOSED: [2018-10-08 Mon 15:35]
+use proxy 10.192.223.197:80
+
+prometheus: http://30.0.1.3:9090/graph
+
+grafana: http://30.0.1.5:3000/d/bosh_system_overview/bosh-system-overview?refresh=30s&orgId=1
+admin/3ziSDG9VzUPKjd2ruwbVfpG1puEBLZ
+** DONE RAM Overhead is around 500MB
+   CLOSED: [2018-10-07 Sun 17:32]
+** Mount docker socket file to pod
+** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+** TODO Install lsof package in GKE worker vm: Container-Optimized OS (cos) OS image
+** You can't configure less than 3 worker nodes
+** cost evaluation
+** TODO For each k8s cluster, one master for me?
+** TODO Schedule workload for a given node pool on purpose
+* Blog: GKE Marketplace                                            :noexport:
+- click-to-deploy: https://github.com/GoogleCloudPlatform/click-to-deploy
+| Service       | Link                                                                                 |
+|---------------+--------------------------------------------------------------------------------------|
+| postgresql    | https://github.com/GoogleCloudPlatform/click-to-deploy/tree/master/k8s/postgresql    |
+| elasticsearch | https://github.com/GoogleCloudPlatform/click-to-deploy/tree/master/k8s/elasticsearch |
+| wordpress     | https://github.com/GoogleCloudPlatform/click-to-deploy/tree/master/k8s/wordpress     |
+| prometheus    | https://github.com/GoogleCloudPlatform/click-to-deploy/tree/master/k8s/prometheus    |
+
+- Similar marketplace products
+| Service          | Link                                |
+|------------------+-------------------------------------|
+| helm/chartmuseum | https://github.com/helm/chartmuseum |
+| kubeapps         | https://kubeapps.com/               |
+
+** DONE not using helm to implement it
+   CLOSED: [2018-10-19 Fri 09:57]
+** DONE Deleting application won't remove pv
+   CLOSED: [2018-10-19 Fri 10:35]
+** DONE Delete namespace takes more than 15 minutes
+   CLOSED: [2018-10-19 Fri 10:35]
+** DONE Very early stage
+   CLOSED: [2018-10-19 Fri 10:38]
+- No HA deployment
+- Don't support people to customize
+- No need to setup vhost: only one database instance
+- Export to service
+
+https://github.com/GoogleCloudPlatform/click-to-deploy/tree/master/k8s/wordpress#expose-wordpress-service-externally
+** TODO GKE application market compared with: k8s Operator, k8s helm
+** TODO workflow of marketplace
+- Choose flavor
+* TODO [#A] doc: how much it cost to download 10GB data from GCP bucket? :noexport:
+* TODO [#A] Try GCP stack-driver                                   :noexport:
+* TODO GKE On-Prem: https://cloud.google.com/gke-on-prem/          :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO [#A] grant vmware bucket access to a key                    :noexport:
+* TODO https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/infrastructure-as-a-service/cloud-services-compute/google-compute-engine-cheat-sheet :noexport:
+* TODO GCP the only public cloud to support VM live migration      :noexport:
