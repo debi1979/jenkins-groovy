@@ -1,0 +1,292 @@
+* Vim CheatSheet                                                      :Tools:
+:PROPERTIES:
+:type:     tool
+:export_file_name: cheatsheet-vim-A4.pdf
+:END:
+
+#+BEGIN_HTML
+<a href="https://github.com/dennyzhang/cheatsheet-vim-A4"><img align="right" width="200" height="183" src="https://www.dennyzhang.com/wp-content/uploads/denny/watermark/github.png" /></a>
+<div id="the whole thing" style="overflow: hidden;">
+<div style="float: left; padding: 5px"> <a href="https://www.linkedin.com/in/dennyzhang001"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a></div>
+<div style="float: left; padding: 5px"><a href="https://github.com/dennyzhang"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a></div>
+<div style="float: left; padding: 5px"><a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a></div>
+</div>
+
+<br/><br/>
+<a href="http://makeapullrequest.com" target="_blank" rel="nofollow"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
+#+END_HTML
+
+- PDF Link: [[https://github.com/dennyzhang/cheatsheet-vim-A4/blob/master/cheatsheet-vim-A4.pdf][cheatsheet-vim-A4.pdf]], Category: [[https://cheatsheet.dennyzhang.com/category/tools/][tools]]
+- Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-vim-A4
+- Related posts: [[https://cheatsheet.dennyzhang.com/cheatsheet-shell-A4][Shell CheatSheet]], [[https://github.com/topics/denny-cheatsheets][#denny-cheatsheets]]
+
+File me [[https://github.com/dennyzhang/cheatsheet.dennyzhang.com/issues][Issues]] or star [[https://github.com/dennyzhang/cheatsheet.dennyzhang.com][this repo]].
+** Basic Usage
+| Name                             | Summary                   |
+|----------------------------------+---------------------------|
+| Show help                        | =:help=                   |
+| Enter to paste mode              | =:set paste=              |
+| Put vim to background/foreground | =C-z=; =fg=               |
+| Password protecting file         | =vim +X filename=         |
+| Install enhanced vim             | =yum install vim-enhance= |
+** Movement
+| Name                        | Summary                       |
+|-----------------------------+-------------------------------|
+| Page down/up                | =C-d= /  =C-b=; =C-u= / =C-f= |
+| Forward/backward character  | =l=, =h=                      |
+| Prevous/next line           | =k=, =Ctrl-p=; =j=, =Ctrl-n=  |
+| Move to next word           | =w/W=                         |
+| Go to the top               | =gg=                          |
+| Go to the bottom            | =G=                           |
+| Go to beginning of the line | =B=                           |
+| Go to end of the line       | =0=                           |
+** Deletion
+| Name                 | Summary |
+|----------------------+---------|
+| Delete current word  | =d-w=   |
+| Delete current line  | =d-d=   |
+| Delete to the bottom | =d-G=   |
+** Changes
+| Name                      | Summary           |
+|---------------------------+-------------------|
+| Undo the previous changes | In view mode, =u= |
+| Reload file from disk     | =:e=              |
+** Panel
+| Name                 | Summary          |
+|----------------------+------------------|
+| Next panel           | =C-h=            |
+| Split panel          | =:split=         |
+| Vertical split panel | =:vsplit=        |
+| Change panel size    | =C-w >=, =C-w <= |
+** Blocks
+| Name                    | Summary       |
+|-------------------------+---------------|
+| Copy block              | =shift+v, y=  |
+| Paste block             | =shift+v, p=  |
+| Cut block               | =shift+v, x=  |
+| comment/uncomment block | =shift+v, gc= |
+** Files
+| Name                     | Summary            |
+|--------------------------+--------------------|
+| Show current filename    | =:echo @%=         |
+| Open a new file          | =:edit <filename>= |
+
+#+BEGIN_HTML
+<a href="https://cheatsheet.dennyzhang.com/cheatsheet-vim-A4"><img align="left" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet-vim-A4/master/images/vim_cheat_sheet_for_programmers_screen.png" /> </a>
+
+Image credit to http://michael.peopleofhonoronly.com/vim/
+#+END_HTML
+** More Resources
+License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_license.txt][MIT License]].
+#+BEGIN_HTML
+<a href="https://cheatsheet.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
+<a href="https://cheatsheet.dennyzhang.com"><img align="right" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
+
+<a href="https://www.linkedin.com/in/dennyzhang001"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a>
+<a href="https://github.com/dennyzhang"><img align="bottom"src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a>
+<a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a>
+#+END_HTML
+* org-mode configuration                                           :noexport:
+#+STARTUP: overview customtime noalign logdone showall
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LATEX_HEADER: \usepackage[margin=0.6in]{geometry}
+#+LaTeX_CLASS_OPTIONS: [8pt]
+#+LATEX_HEADER: \usepackage[english]{babel}
+#+LATEX_HEADER: \usepackage{lastpage}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+#+LATEX_HEADER: \fancyhf{}
+#+LATEX_HEADER: \rhead{Updated: \today}
+#+LATEX_HEADER: \rfoot{\thepage\ of \pageref{LastPage}}
+#+LATEX_HEADER: \lfoot{\href{https://github.com/dennyzhang/cheatsheet-vim-A4}{GitHub: https://github.com/dennyzhang/cheatsheet-vim-A4}}
+#+LATEX_HEADER: \lhead{\href{https://cheatsheet.dennyzhang.com/cheatsheet-vim-A4}{Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-vim-A4}}
+#+AUTHOR: Denny Zhang
+#+EMAIL:  denny@dennyzhang.com
+#+TAGS: noexport(n)
+#+PRIORITIES: A D C
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+EXPORT_EXCLUDE_TAGS: exclude noexport
+#+SEQ_TODO: TODO HALF ASSIGN | DONE BYPASS DELEGATE CANCELED DEFERRED
+#+LINK_UP:
+#+LINK_HOME:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* vim local                                                        :noexport:
+** DONE vim page up: Ctrl-B
+   CLOSED: [2017-05-21 Sun 13:22]
+ http://vim.wikia.com/wiki/All_the_right_moves
+#+BEGIN_EXAMPLE
+
+  Vim Tips Wiki
+ Community portal
+ To do
+ On the Wiki
+ Wiki Activity
+ Random page
+ Videos
+ Images
+ Chat
+  Contribute
+ All the right moves
+ 1,625PAGES ON
+ THIS WIKI Add New Page  Edit    Talk0 	Share
+ Tip 278 Printable Monobook Previous Next
+ created 2002 · complexity basic · author vim_power · version 6.0
+
+ Vim provides many ways to move the cursor. Becoming familiar with them leads to more effective text editing.
+
+ h   move one character left
+ j   move one row down
+ k   move one row up
+ l   move one character right
+ w   move to beginning of next word
+ b   move to previous beginning of word
+ e   move to end of word
+ W   move to beginning of next word after a whitespace
+ B   move to beginning of previous word before a whitespace
+ E   move to end of word before a whitespace
+ All the above movements can be preceded by a count; e.g. 4j moves down 4 lines.
+
+ 0   move to beginning of line
+ $   move to end of line
+ _   move to first non-blank character of the line
+ g_  move to last non-blank character of the line
+
+ gg  move to first line
+ G   move to last line
+ nG  move to n'th line of file (n is a number; 12G moves to line 12)
+
+ H   move to top of screen
+ M   move to middle of screen
+ L   move to bottom of screen
+
+ z.  scroll the line with the cursor to the center of the screen
+ zt  scroll the line with the cursor to the top
+ zb  scroll the line with the cursor to the bottom
+
+ Ctrl-D  move half-page down
+ Ctrl-U  move half-page up
+ Ctrl-B  page up
+ Ctrl-F  page down
+ Ctrl-O  jump to last (older) cursor position
+ Ctrl-I  jump to next cursor position (after Ctrl-O)
+ Ctrl-Y  move view pane up
+ Ctrl-E  move view pane down
+
+ n   next matching search pattern
+ N   previous matching search pattern
+  *   next whole word under cursor
+ #   previous whole word under cursor
+ g*  next matching search (not whole word) pattern under cursor
+ g#  previous matching search (not whole word) pattern under cursor
+ %   jump to matching bracket { } [ ] ( )
+
+ fX  to next 'X' after cursor, in the same line (X is any character)
+ FX  to previous 'X' before cursor (f and F put the cursor on X)
+ tX  til next 'X' (similar to above, but cursor is before X)
+ TX  til previous 'X'
+ ;   repeat above, in same direction
+ ,   repeat above, in reverse direction
+ See :help {command} (for example, :help g_) for all of the above if you want more details.
+#+END_EXAMPLE
+** TODO vim dotfile: git@github.com:pivotal-cf/oratos-dotfiles.git
+** TODO vim copy mess up: /Users/zdenny/Dropbox/private_data/work/vmware/code/pks-ci/tests/integration-tests/wavefront-proxy-release/wavefront-proxy/wavefront_proxy_test.go
+** TODO vim disable tab key: https://stackoverflow.com/questions/1878974/redefine-tab-as-4-spaces/1878984#1878984
+** TODO Switch to next open file
+** more content
+*** vim
+# File management
+
+:e              reload file
+:q              quit
+:q!             quit without saving changes
+:w              write file
+:w {file}       write new file
+:x              write file and exit
+
+# Movement
+
+    k
+  h   l         basic motion
+    j
+
+w               next start of word
+W               next start of whitespace-delimited word
+e               next end of word
+E               next end of whitespace-delimited word
+b               previous start of word
+B               previous start of whitespace-delimited word
+0               start of line
+$               end of line
+gg              go to first line in file
+G               go to end of file
+gk		move down one displayed line
+gj		move up one displayed line
+
+# Insertion
+#   To exit from insert mode use Esc or Ctrl-C
+#   Enter insertion mode and:
+
+a               append after the cursor
+A               append at the end of the line
+i               insert before the cursor
+I               insert at the beginning of the line
+o               create a new line under the cursor
+O               create a new line above the cursor
+R               enter insert mode but replace instead of inserting chars
+:r {file}       insert from file
+
+# Editing
+
+u               undo
+yy              yank (copy) a line
+y{motion}       yank text that {motion} moves over
+p               paste after cursor
+P               paste before cursor
+<Del> or x      delete a character
+dd              delete a line
+d{motion}       delete text that {motion} moves over
+
+# Search and replace with the `:substitute` (aka `:s`) command
+
+:s/foo/bar/	replace the first match of 'foo' with 'bar' on the current line only
+:s/foo/bar/g	replace all matches (`g` flag) of 'foo' with 'bar' on the current line only
+:%s/foo/bar/g	replace all matches of 'foo' with 'bar' in the entire file (`:%s`)
+:%s/foo/bar/gc	ask to manually confirm (`c` flag) each replacement
+
+# Preceding a motion or edition with a number repeats it 'n' times
+# Examples:
+50k         moves 50 lines up
+2dw         deletes 2 words
+5yy         copies 5 lines
+42G         go to line 42
+
+** vim cheatsheet: https://www.cheatography.com/stepk/cheat-sheets/vim-nerdtree/
+** TODO vim c-o
+** TODO vim : %s/XXX/XXX/gc
+** TODO vim: G: join line
+** TODO vim c-p: search
+** TODO vim scheme issue
+** HALF vim: D, C
+** HALF vim b
+** HALF vim U(captilze), u(lowercase)
+** HALF vim v w
+** HALF C-h, C-l
+** HALF vim: C-o, C-i: buffer
+* TODO vim: go to the end of the line                              :noexport:
+* TODO vim :GoBuild                                                :noexport:
+* HALF [#A] vim copy issue                                         :noexport:
+> oratos-ci/tasks/sink-crosstalk/task && vim oratos-ci/tasks/sink-crosstalk/task
+bash oratos-ci/tasks/sink-crosstalk/task
+    result="$(echo "$ns_a_result" | jq '.namespace["crosstalk-ns-b"]' --join-output)"
+    check_result_cnt "$expected" "$result" \
+        "Expected syslog-receiver-crosstalk-ns-a to have value $expected for crosstalk-ns-b"
+
+
+    result="$(echo "$ns_a_result" | jq '.namespace["crosstalk-ns-b"]' --join-output)"
+    check_result_cnt "$expected" "$result" \
+        Expected syslog-receiver-crosstalk-ns-a to have value $expected for crosstalk-ns-b"
+* TODO vim cheatsheet: https://jimmysong.io/cheatsheets/vim        :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* TODO [#A] vim paste issue: integration-tests/vrops-release/vrops_test.go :noexport:
