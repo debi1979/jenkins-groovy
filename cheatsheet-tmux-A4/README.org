@@ -1,0 +1,266 @@
+* Tmux CheatSheet                                                     :Tools:
+:PROPERTIES:
+:type:     tool
+:export_file_name: cheatsheet-tmux-A4.pdf
+:END:
+
+#+BEGIN_HTML
+<a href="https://github.com/dennyzhang/cheatsheet-tmux-A4"><img align="right" width="200" height="183" src="https://www.dennyzhang.com/wp-content/uploads/denny/watermark/github.png" /></a>
+<div id="the whole thing" style="overflow: hidden;">
+<div style="float: left; padding: 5px"> <a href="https://www.linkedin.com/in/dennyzhang001"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a></div>
+<div style="float: left; padding: 5px"><a href="https://github.com/dennyzhang"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a></div>
+<div style="float: left; padding: 5px"><a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a></div>
+</div>
+
+<br/><br/>
+<a href="http://makeapullrequest.com" target="_blank" rel="nofollow"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"/></a>
+#+END_HTML
+
+- PDF Link: [[https://github.com/dennyzhang/cheatsheet-tmux-A4/blob/master/cheatsheet-tmux-A4.pdf][cheatsheet-tmux-A4.pdf]], Category: [[https://cheatsheet.dennyzhang.com/category/tools/][tools]]
+- Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-tmux-A4
+- Related posts: [[https://cheatsheet.dennyzhang.com/cheatsheet-ssh-A4][Cheatsheet: ssh]], [[https://github.com/topics/denny-cheatsheets][#denny-cheatsheets]]
+
+File me [[https://github.com/dennyzhang/cheatsheet.dennyzhang.com/issues][Issues]] or star [[https://github.com/dennyzhang/cheatsheet.dennyzhang.com][this repo]].
+** Tmux Basic
+| Name                   | Comment                                |
+|------------------------+----------------------------------------|
+| Create new session     | =tmux new -s denny=                    |
+| List all sessions      | =tmux ls=                              |
+| Attach to one session  | =tmux attach -t denny=                 |
+| Detach session         | =C-b d=                                |
+| Kill one session       | =tmux kill-session -t denny=           |
+| List all shortcut keys | =C-b :list-keys=, =C-b ?= Very useful! |
+| Kill current window    | =C-b &=                                |
+| Default conf file      | =~/.tmux.conf=, =~/.tmate.conf=        |
+** Tmux Layout & Scroll
+| Name                      | Comment                  |
+|---------------------------+--------------------------|
+| Switch to next pane       | =C-b o=                  |
+| Vertically split pane     | =C-b %=                  |
+| Horizontally split pane   | =C-b "=                  |
+| Kill current pane         | =C-b x=                  |
+| Swap two panes            | =C-b C-o=                |
+| Resize current pane right | =C-b :resize-pane -R 20= |
+| Resize current pane down  | =C-b :resize-pane -D 10= |
+** Tmux Console Output
+| Name                          | Comment                                          |
+|-------------------------------+--------------------------------------------------|
+| Enter copy mode               | =C-b [=, press q/Esc to exit                     |
+| Search output                 | =C-b C-s=, =C-b C-u=                             |
+| Paste buffer to current panel | =C-b ]=                                          |
+| Page up/down                  | Enter copy mode, then use normal navigation keys |
+| [[http://osxdaily.com/2015/07/07/page-up-page-down-mac-keyboard/][Page up/down in Mac]]           | =Fn + Up Arrow=                                  |
+| Show things in current buffer | =tmux show-buffer=                               |
+| List all buffer               | =tmux list-buffers=                              |
+| Save buffer to file           | =tmux save-buffer foo.txt=                       |
+** Tmate
+| Name                                           | Comment                                              |
+|------------------------------------------------+------------------------------------------------------|
+| see tmate log messages: ssh conn string        | =tmate show-messages=                                |
+| Launch tmate in a detached state               | =tmate -S /tmp/tmate.sock new-session -d=            |
+| Blocks until the SSH connection is established | =tmate -S /tmp/tmate.sock wait tmate-ready=          |
+| Prints tmate SSH connection string             | =tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}'= |
+| Make your tmate session big by default         | [[https://apple.stackexchange.com/a/98406][Make your default iterm window big]]                   |
+** Scripts
+- Copy to mac clipboard
+
+Note: Only works for the laptop who hosts the tmux/tmate session
+
+#+BEGIN_SRC sh
+brew install reattach-to-user-namespace
+
+# In tmux, search a region. Then save to pbcopy
+tmux save-buffer - | reattach-to-user-namespace pbcopy
+
+# In mac terminal
+pbpaste
+#+END_SRC
+** More Resources
+https://gist.github.com/MohamedAlaa/2961058
+
+https://wiki.freebsdchina.org/software/t/tmux
+
+https://robots.thoughtbot.com/a-tmux-crash-course
+
+https://gist.github.com/Bekbolatov/6840069e51382965fdad
+
+License: Code is licensed under [[https://www.dennyzhang.com/wp-content/mit_license.txt][MIT License]].
+
+#+BEGIN_HTML
+ <a href="https://cheatsheet.dennyzhang.com"><img align="right" width="201" height="268" src="https://raw.githubusercontent.com/USDevOps/mywechat-slack-group/master/images/denny_201706.png"></a>
+ <a href="https://cheatsheet.dennyzhang.com"><img align="right" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
+
+ <a href="https://www.linkedin.com/in/dennyzhang001"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/linkedin.png" alt="linkedin" /></a>
+ <a href="https://github.com/dennyzhang"><img align="bottom"src="https://www.dennyzhang.com/wp-content/uploads/sns/github.png" alt="github" /></a>
+ <a href="https://www.dennyzhang.com/slack" target="_blank" rel="nofollow"><img align="bottom" src="https://www.dennyzhang.com/wp-content/uploads/sns/slack.png" alt="slack"/></a>
+#+END_HTML
+* org-mode configuration                                           :noexport:
+#+STARTUP: overview customtime noalign logdone showall
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LATEX_HEADER: \usepackage[margin=0.6in]{geometry}
+#+LaTeX_CLASS_OPTIONS: [8pt]
+#+LATEX_HEADER: \usepackage[english]{babel}
+#+LATEX_HEADER: \usepackage{lastpage}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+#+LATEX_HEADER: \fancyhf{}
+#+LATEX_HEADER: \rhead{Updated: \today}
+#+LATEX_HEADER: \rfoot{\thepage\ of \pageref{LastPage}}
+#+LATEX_HEADER: \lfoot{\href{https://github.com/dennyzhang/cheatsheet-tmux-A4}{GitHub: https://github.com/dennyzhang/cheatsheet-tmux-A4}}
+#+LATEX_HEADER: \lhead{\href{https://cheatsheet.dennyzhang.com/cheatsheet-tmux-A4}{Blog URL: https://cheatsheet.dennyzhang.com/cheatsheet-tmux-A4}}
+#+AUTHOR: Denny Zhang
+#+EMAIL:  denny@dennyzhang.com
+#+TAGS: noexport(n)
+#+PRIORITIES: A D C
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+EXPORT_EXCLUDE_TAGS: exclude noexport
+#+SEQ_TODO: TODO HALF ASSIGN | DONE BYPASS DELEGATE CANCELED DEFERRED
+#+LINK_UP:
+#+LINK_HOME:
+* #  --8<-------------------------- separator ------------------------>8-- :noexport:
+* [#A] Blog: tmux一个优秀的终端复用软件,类似GNU Screen            :noexport:
+| Name                   | Comment                                                         |
+|------------------------+-----------------------------------------------------------------|
+| C-b d                  | 退出tmux                                                        |
+| C-b c                  | 创建新窗口                                                      |
+| C-b n                  | 切换至下一窗口                                                  |
+| C-b :                  | 进入命令行模式, 例如split-window, rename-window, rename-session |
+| C-b Ctrl+方向          | 以1个单元格为单位移动边缘以调整当前面板大小                     |
+
+- tmux使用C/S模型构建,主要包括以下单元模块:
+| Name    | Comment                                    |
+|---------+--------------------------------------------|
+| server  | 服务器.输入tmux命令时就开启了一个服务器. |
+| session | 会话.一个服务器可以包含多个会话.         |
+| window  | 窗口.一个会话可以包含多个窗口.           |
+| pane    | 面板.一个窗口可以包含多个面板.           |
+** TODO mac make tmux make the font bigger
+** DONE tmux page up and page down: i, c-b c-f
+   CLOSED: [2015-10-13 Tue 15:56]
+#+BEGIN_EXAMPLE
+这个可以起tmux
+tmux里,一两个小时基本不过期.
+在 ~/.tmux.conf 里加入一下配置内容:
+#用vi模式操作 翻页用c-b c-f等 可以把vi替换成 emacs
+setw -g mode-keys vi
+#+END_EXAMPLE
+** DONE Create new-window with current directory in tmux
+   CLOSED: [2017-06-27 Tue 17:27]
+https://unix.stackexchange.com/questions/12032/create-new-window-with-current-directory-in-tmux
+cat > ~/.tmux.conf <<EOF
+bind c new-window -c "#{pane_current_path}"
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+EOF
+
+cat ~/.tmux.conf
+* DONE tmate: Instant Terminal Sharing                             :noexport:
+  CLOSED: [2018-07-18 Wed 09:38]
+https://github.com/tmate-io/tmate
+** DONE [#A] copy k8s yaml to tmux, the two lines mess up: :set paste, then press i
+  CLOSED: [2018-07-18 Wed 16:40]
+** DONE tmate copy buffer to mac clipboard
+  CLOSED: [2018-07-18 Wed 16:39]
+http://www.rushiagr.com/blog/2016/06/16/everything-you-need-to-know-about-tmux-copy-pasting/
+https://awhan.wordpress.com/2010/06/20/copy-paste-in-tmux/
+** TODO [#A] Emacs Can't ssh to tmate                              :IMPORTANT:
+host host
+     HostName sf2.tmate.io
+     # Port 12360
+     StrictHostKeyChecking no
+     IdentityFile ~/.ssh/id_rsa
+     User Bkk4XXXXXXXXX
+** TODO tmux copy and paste
+** TODO tmux copy the whole buffer context
+http://stackoverflow.com/questions/12289227/how-do-i-copy-entire-contents-of-file-1-pane-in-tmux-emacs-copy-mode
+** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+** TODO tmux zsh
+** TODO tmate one session
+** TODO tmate: disable C-b c
+** TODO re-run the tmux last ssh command
+** TODO [#A] emacs tramp doesn't work with tmux
+** TODO Save sessions of previous tmux ssh
+** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+** TODO [#A] tmate: ssh directly
+* TODO [#A] tmate sometimes doesn't work                           :noexport:
+* more content                                                     :noexport:
+** file1
+# Start tmux:
+tmux
+
+# Detach from tmux:
+Ctrl-b d
+
+# Restore tmux session:
+tmux attach
+
+# Detach an already attached session (great if you are moving devices with different screen resolutions)
+tmux attach -d
+
+# Display session:
+tmux ls
+
+# Rename session:
+Ctrl-b $
+
+# Switch session:
+Ctrl-b s
+
+# Start a shared session:
+tmux -S /tmp/your_shared_session
+chmod 777 /tmp/your_shared_session
+
+# Help screen (Q to quit):
+Ctrl-b ?
+
+# Scroll in window:
+Ctrl-b PageUp/PageDown
+
+# Reload configuation file
+Ctrl-b : source-file /path/to/file
+
+# Window management
+# =================
+
+# Create window:
+Ctrl-b c
+
+# Destroy window:
+Ctrl-b x
+
+# Switch between windows:
+Ctrl-b [0-9]
+or
+Ctrl-b Arrows
+
+# Split windows horizontally:
+Ctrl-b %
+
+# Split windows vertically:
+Ctrl-b "
+* TODO [#A] tmate copy files in client side              :noexport:IMPORTANT:
+* TODO ngrok + tmux: setup ssh reverse proxy                       :noexport:
+https://ngrok.com/docs
+** setup ssh reverse proxy ngrok
+** ngrok tmux ssh
+ https://gist.github.com/karampok/64067862052b2565b348812f0cb13bfc
+ https://gist.github.com/keithpitty/38266d38d44d06fabf6b707df608f73e
+
+ ngrok authtoken 2sVqHXBmmsSmZfCaVcrqR_6BzxZJu94dv137xigzkyV
+
+ gh-auth add --users="pks" --command="$(which tmux) attach -t tc"
+
+ ssh pks@0.tcp.ngrok.io -p 12956 -vvvv
+
+#+BEGIN_EXAMPLE
+ zdenny-a02:~ zdenny$ ngrok authtoken 2sVqHXBmmsSmZfCaVcrqR_6BzxZJu94dv137xigzkyV
+ Authtoken saved to configuration file: /Users/zdenny/.ngrok2/ngrok.yml
+
+ ngrok tcp 22
+
+ ssh zdenny@0.tcp.ngrok.io -p 10550
+#+END_EXAMPLE
+* TODO tmux screen get locked                                      :noexport:
+* TODO tmux search: list all matched entries                       :noexport:
